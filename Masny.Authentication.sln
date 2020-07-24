@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.Basic", "src\Masny.Basic\Masny.Basic.csproj", "{9E64692B-C188-4E67-8E66-A1C1AE4ECA9E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.IdentityAuth", "src\Masny.IdentityAuth\Masny.IdentityAuth.csproj", "{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9E64692B-C188-4E67-8E66-A1C1AE4ECA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E64692B-C188-4E67-8E66-A1C1AE4ECA9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E64692B-C188-4E67-8E66-A1C1AE4ECA9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
