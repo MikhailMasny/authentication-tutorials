@@ -1,7 +1,12 @@
 using Masny.Basic.AuthorizationRequirments;
+using Masny.Basic.CookieAuth;
+using Masny.Basic.CustomPolicyProvider;
+using Masny.Basic.TransformationAuth;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -44,9 +49,22 @@ namespace Masny.Basic
                 });
             });
 
+            services.AddSingleton<IAuthorizationPolicyProvider, CustomAuthorizationPolicyProvider>();
+            services.AddScoped<IAuthorizationHandler, SecurityLevelHandler>();
             services.AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>();
+            services.AddScoped<IAuthorizationHandler, CookieJarAuthorizationHandler>();
+            services.AddScoped<IClaimsTransformation, ClaimsTransformation>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(config =>
+            {
+                var defaultAuthBuilder = new AuthorizationPolicyBuilder();
+                var defaultAuthPolicy = defaultAuthBuilder
+                    .RequireAuthenticatedUser()
+                    .RequireClaim(ClaimTypes.Name)
+                    .Build();
+
+                //config.Filters.Add(new AuthorizeFilter(defaultAuthPolicy));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
