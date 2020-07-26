@@ -33,6 +33,7 @@ namespace Masny.Server.Controllers
             var secretBytes = Encoding.UTF8.GetBytes(AuthConstants.Secret);
             var key = new SymmetricSecurityKey(secretBytes);
             var algorithm = SecurityAlgorithms.HmacSha256;
+
             var signingCredentials = new SigningCredentials(key, algorithm);
 
             var token = new JwtSecurityToken(
@@ -40,7 +41,7 @@ namespace Masny.Server.Controllers
                 AuthConstants.Audiance,
                 claims,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials);
 
             var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);

@@ -2,8 +2,8 @@
 {
     public static class AuthConstants
     {
-        public const string Audiance = "https://localhost:5001";
+        public const string Audiance = "https://localhost:44318/";
         public const string Issuer = Audiance;
-        public const string Secret = "MySecretKey";
+        public const string Secret = "a0083c08d33d43a9";
     }
 }
