@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.Basic", "src\Masny.Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.IdentityAuth", "src\Masny.IdentityAuth\Masny.IdentityAuth.csproj", "{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.Server", "src\Masny.Server\Masny.Server.csproj", "{41A66746-2E6C-41D7-A5B7-5CEAC5A7F391}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7DA94D4-B308-487C-8100-EDAEEC6F5D05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A66746-2E6C-41D7-A5B7-5CEAC5A7F391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A66746-2E6C-41D7-A5B7-5CEAC5A7F391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A66746-2E6C-41D7-A5B7-5CEAC5A7F391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A66746-2E6C-41D7-A5B7-5CEAC5A7F391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
