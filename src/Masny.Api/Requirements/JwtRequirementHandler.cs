@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Masny.Api.JwtRequirements
+namespace Masny.Api.Requirements
 {
     public class JwtRequirementHandler : AuthorizationHandler<JwtRequirement>
     {
