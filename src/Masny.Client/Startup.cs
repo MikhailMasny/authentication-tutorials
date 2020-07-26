@@ -53,6 +53,8 @@ namespace Masny.Client
                     };
                 });
 
+            services.AddHttpClient();
+
             // Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation 
             services.AddControllersWithViews();
         }

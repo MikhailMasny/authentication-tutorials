@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.Server", "src\Masny.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.Client", "src\Masny.Client\Masny.Client.csproj", "{B340E888-8FAD-4DA7-BCAD-BD32A43474E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.Api", "src\Masny.Api\Masny.Api.csproj", "{1816FDF4-EFBD-4D85-A818-4FBF0719544E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B340E888-8FAD-4DA7-BCAD-BD32A43474E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B340E888-8FAD-4DA7-BCAD-BD32A43474E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B340E888-8FAD-4DA7-BCAD-BD32A43474E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1816FDF4-EFBD-4D85-A818-4FBF0719544E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1816FDF4-EFBD-4D85-A818-4FBF0719544E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1816FDF4-EFBD-4D85-A818-4FBF0719544E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1816FDF4-EFBD-4D85-A818-4FBF0719544E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿using Masny.Server.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -45,7 +46,6 @@ namespace Masny.Server.Controllers
             query.Add("code", code);
             query.Add("state", state);
 
-
             return Redirect($"{redirectUri}{query}");
         }
 
@@ -90,6 +90,17 @@ namespace Masny.Server.Controllers
             await Response.Body.WriteAsync(responseBytes, 0, responseBytes.Length);
 
             return Redirect(redirect_uri);
+        }
+
+        [Authorize]
+        public IActionResult Validate()
+        {
+            if (HttpContext.Request.Query.TryGetValue("access_token", out var accessToken))
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }
