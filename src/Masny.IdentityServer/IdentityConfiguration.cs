@@ -11,14 +11,22 @@ namespace Masny.IdentityServer
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
+                //new IdentityResources.Profile(),
+                new IdentityResource
+                {
+                    Name = "rc.scope",
+                    UserClaims =
+                    {
+                        "rc.garndma"
+                    }
+                }
             };
 
         public static IEnumerable<ApiResource> GetApis() =>
             new List<ApiResource> 
             {
                 new ApiResource("Masny.IdentityApiOne"),
-                new ApiResource("Masny.IdentityApiTwo"),
+                new ApiResource("Masny.IdentityApiTwo", new string[] { "rc.api.garndma" }),
             };
 
         //public static IEnumerable<ApiScope> GetScopes() =>
@@ -47,8 +55,11 @@ namespace Masny.IdentityServer
                         "ApiOne",
                         "ApiTwo",
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
+                        //IdentityServerConstants.StandardScopes.Profile,
+                        "rc.scope",
                     },
+                    // Puts all the claims in the id token
+                    //AlwaysIncludeUserClaimsInIdToken = true,
                     RequireConsent = false,
                 },
             };
