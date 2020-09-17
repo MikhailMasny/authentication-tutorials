@@ -16,6 +16,12 @@ namespace Masny.IdentityApiOne
                     config.Audience = "Masny.IdentityApiOne";
                 });
 
+            services.AddCors(confg =>
+                confg.AddPolicy("AllowAll",
+                    p => p.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()));
+
             services.AddControllers();
         }
 
@@ -25,6 +31,8 @@ namespace Masny.IdentityApiOne
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 

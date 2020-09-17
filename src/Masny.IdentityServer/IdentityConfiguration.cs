@@ -68,6 +68,7 @@ namespace Masny.IdentityServer
                     ClientId = "client_id_js",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RedirectUris = { "https://localhost:44379/home/signin" },
+                    AllowedCorsOrigins = { "https://localhost:44379" },
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
                         "Masny.IdentityApiOne",
