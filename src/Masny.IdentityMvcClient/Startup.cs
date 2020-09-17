@@ -37,6 +37,7 @@ namespace Masny.IdentityMvcClient
                     config.Scope.Clear();
                     config.Scope.Add("openid");
                     config.Scope.Add("rc.scope");
+                    config.Scope.Add("offline_access");
                     config.Scope.Add("Masny.IdentityApiOne");
                     config.Scope.Add("Masny.IdentityApiTwo");
                 });
