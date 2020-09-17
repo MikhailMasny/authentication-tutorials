@@ -37,8 +37,8 @@ namespace Masny.IdentityMvcClient
                     config.Scope.Clear();
                     config.Scope.Add("openid");
                     config.Scope.Add("rc.scope");
-                    config.Scope.Add("ApiOne");
-                    config.Scope.Add("ApiTwo");
+                    config.Scope.Add("Masny.IdentityApiOne");
+                    config.Scope.Add("Masny.IdentityApiTwo");
                 });
 
             services.AddHttpClient();

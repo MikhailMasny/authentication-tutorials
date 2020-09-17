@@ -23,7 +23,7 @@ namespace Masny.IdentityServer
             };
 
         public static IEnumerable<ApiResource> GetApis() =>
-            new List<ApiResource> 
+            new List<ApiResource>
             {
                 new ApiResource("Masny.IdentityApiOne"),
                 new ApiResource("Masny.IdentityApiTwo", new string[] { "rc.api.garndma" }),
@@ -36,9 +36,9 @@ namespace Masny.IdentityServer
         //    };
 
         public static IEnumerable<Client> GetClients() =>
-            new List<Client> 
+            new List<Client>
             {
-                new Client 
+                new Client
                 {
                     ClientId = "client_id",
                     ClientSecrets = { new Secret("client_secret".ToSha256()) },
@@ -52,8 +52,8 @@ namespace Masny.IdentityServer
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { "https://localhost:44317/signin-oidc" },
                     AllowedScopes = {
-                        "ApiOne",
-                        "ApiTwo",
+                        "Masny.IdentityApiOne",
+                        "Masny.IdentityApiTwo",
                         IdentityServerConstants.StandardScopes.OpenId,
                         //IdentityServerConstants.StandardScopes.Profile,
                         "rc.scope",
@@ -62,6 +62,18 @@ namespace Masny.IdentityServer
                     //AlwaysIncludeUserClaimsInIdToken = true,
                     RequireConsent = false,
                 },
+                new Client 
+                {
+                    ClientId = "client_id_js",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RedirectUris = { "https://localhost:44379/home/signin" },
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        "Masny.IdentityApiOne",
+                    },
+                    AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
+                }
             };
     }
 }

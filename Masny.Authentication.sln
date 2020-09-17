@@ -32,7 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.IdentityMvcClient", "src\Masny.IdentityMvcClient\Masny.IdentityMvcClient.csproj", "{821F206A-5314-4910-98BE-C0FC8BF5DFB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.IdentityMvcClient", "src\Masny.IdentityMvcClient\Masny.IdentityMvcClient.csproj", "{821F206A-5314-4910-98BE-C0FC8BF5DFB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.JavaScriptClient", "src\Masny.JavaScriptClient\Masny.JavaScriptClient.csproj", "{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +78,10 @@ Global
 		{821F206A-5314-4910-98BE-C0FC8BF5DFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{821F206A-5314-4910-98BE-C0FC8BF5DFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{821F206A-5314-4910-98BE-C0FC8BF5DFB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{DB7F21C0-038D-4887-973F-9A40377C6531} = {ACDB44E4-FF06-483D-B6B4-A0201E15B080}
 		{BF3A6132-CB3E-4579-B8DF-FBA80CD6461D} = {ACDB44E4-FF06-483D-B6B4-A0201E15B080}
 		{821F206A-5314-4910-98BE-C0FC8BF5DFB3} = {ACDB44E4-FF06-483D-B6B4-A0201E15B080}
+		{93D03986-97C9-47D8-8BE2-BA6BB680B1AB} = {ACDB44E4-FF06-483D-B6B4-A0201E15B080}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A18014BF-BD92-42DA-BB24-6C16F58DE8C4}
