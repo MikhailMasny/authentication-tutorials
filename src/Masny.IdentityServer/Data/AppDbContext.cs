@@ -9,7 +9,6 @@ namespace Masny.IdentityServer.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-
         }
     }
 }

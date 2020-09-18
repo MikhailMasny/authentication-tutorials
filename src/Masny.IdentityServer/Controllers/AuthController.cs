@@ -45,7 +45,6 @@ namespace Masny.IdentityServer.Controllers
             }
             else if (result.IsLockedOut)
             {
-
             }
 
             return View(loginViewModel);

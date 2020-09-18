@@ -1,12 +1,8 @@
-﻿using Masny.IdentityAuth.Data;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NETCore.MailKit.Core;
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Masny.IdentityAuth.Controllers
@@ -54,7 +50,7 @@ namespace Masny.IdentityAuth.Controllers
             if (user != null)
             {
                 var signInResult = await _signInManager.PasswordSignInAsync(user, password, false, false); // but on prod, lockoutOnFailure: true
-                if(signInResult.Succeeded)
+                if (signInResult.Succeeded)
                 {
                     return RedirectToAction(nameof(Secret));
                 }

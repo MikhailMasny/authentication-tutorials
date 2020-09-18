@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
 using System;
@@ -22,8 +21,6 @@ namespace Masny.IdentityAuth
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(config =>
@@ -49,7 +46,7 @@ namespace Masny.IdentityAuth
             });
 
             //var mailKitOptions = Configuration.GetSection("Email").Get<MailKitOptions>();
-            services.AddMailKit(config => 
+            services.AddMailKit(config =>
             {
                 var options = new MailKitOptions
                 {
@@ -66,7 +63,6 @@ namespace Masny.IdentityAuth
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

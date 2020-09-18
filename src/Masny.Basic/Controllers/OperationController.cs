@@ -1,6 +1,5 @@
 ﻿using Masny.Basic.CookieAuth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

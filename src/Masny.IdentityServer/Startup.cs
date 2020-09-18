@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Masny.IdentityServer
 {
@@ -50,7 +48,6 @@ namespace Masny.IdentityServer
 
             var assembly = typeof(Startup).Assembly.GetName().Name;
 
-
             // https://docs.microsoft.com/en-us/archive/blogs/kaevans/using-powershell-with-certificates
             //var filePath = Path.Combine(env.ContentRootPath, "is_cert.pfx");
             //var certificate = new X509Certificate2(filePath, "password");
@@ -78,7 +75,8 @@ namespace Masny.IdentityServer
                 .AddDeveloperSigningCredential();
 
             services.AddAuthentication()
-                .AddFacebook(config => {
+                .AddFacebook(config =>
+                {
                     config.AppId = "";
                     config.AppSecret = "";
                 });

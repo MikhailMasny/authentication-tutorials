@@ -33,7 +33,6 @@ namespace Masny.Client.Controllers
             //var serverResponse = await _httpClient.GetAsync($"https://localhost:44318/secret/index?access_token={token}");
             //var apiResponse = await _httpClient.GetAsync("https://localhost:44317/api/secret");
 
-
             var token = await HttpContext.GetTokenAsync("access_token");
 
             var serverResponse = await AccessTokenRefreshWrapper(
