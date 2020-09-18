@@ -72,7 +72,10 @@ namespace Masny.IdentityServer
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,
                         "Masny.IdentityApiOne",
+                        "Masny.IdentityApiTwo",
+                        "rc.scope",
                     },
+                    AccessTokenLifetime = 1,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                 }

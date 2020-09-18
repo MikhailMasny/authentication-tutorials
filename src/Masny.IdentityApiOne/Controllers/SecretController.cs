@@ -6,6 +6,12 @@ namespace Masny.IdentityApiOne.Controllers
 {
     public class SecretController : ControllerBase
     {
+        [Route("/")]
+        public IActionResult Main()
+        {
+            return Ok("Masny.IdentityApiOne");
+        }
+
         [Route("/secret")]
         [Authorize]
         public IActionResult Secret()

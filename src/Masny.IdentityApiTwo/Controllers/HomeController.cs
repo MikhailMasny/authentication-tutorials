@@ -15,6 +15,12 @@ namespace Masny.IdentityApiTwo.Controllers
             _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
         }
 
+        [Route("/")]
+        public IActionResult Main()
+        {
+            return Ok("Masny.IdentityApiTwo");
+        }
+
         [Route("/home")]
         public async Task<IActionResult> Index()
         {
