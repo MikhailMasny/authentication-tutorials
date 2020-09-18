@@ -24,6 +24,11 @@ namespace Masny.IdentityMvcClient.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            return SignOut("Cookie", "oidc");
+        }
+
         [Authorize]
         public async Task<IActionResult> SecretAsync()
         {

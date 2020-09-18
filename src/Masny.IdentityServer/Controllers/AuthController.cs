@@ -1,4 +1,5 @@
-﻿using Masny.IdentityServer.ViewModels;
+﻿using IdentityServer4.Services;
+using Masny.IdentityServer.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,12 +9,15 @@ namespace Masny.IdentityServer.Controllers
     public class AuthController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IIdentityServerInteractionService _interactionService;
         private readonly UserManager<IdentityUser> _userManager;
 
         public AuthController(UserManager<IdentityUser> userManager,
-                              SignInManager<IdentityUser> signInManager)
+                              SignInManager<IdentityUser> signInManager,
+                              IIdentityServerInteractionService interactionService)
         {
             _signInManager = signInManager ?? throw new System.ArgumentNullException(nameof(signInManager));
+            _interactionService = interactionService ?? throw new System.ArgumentNullException(nameof(interactionService));
             _userManager = userManager ?? throw new System.ArgumentNullException(nameof(userManager));
         }
 
@@ -65,6 +69,21 @@ namespace Masny.IdentityServer.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+            await _signInManager.SignOutAsync();
+
+            var logoutRequest = await _interactionService.GetLogoutContextAsync(logoutId);
+
+            if (string.IsNullOrEmpty(logoutRequest.PostLogoutRedirectUri))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return Redirect(logoutRequest.PostLogoutRedirectUri);
         }
     }
 }

@@ -51,6 +51,7 @@ namespace Masny.IdentityServer
                     ClientSecrets = { new Secret("client_secret_mvc".ToSha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { "https://localhost:44317/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44317/Home/Index" },
                     AllowedScopes = {
                         "Masny.IdentityApiOne",
                         "Masny.IdentityApiTwo",
@@ -63,11 +64,12 @@ namespace Masny.IdentityServer
                     AllowOfflineAccess = true,
                     RequireConsent = false,
                 },
-                new Client 
+                new Client
                 {
                     ClientId = "client_id_js",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RedirectUris = { "https://localhost:44379/home/signin" },
+                    PostLogoutRedirectUris = { "https://localhost:44379/Home/Index" },
                     AllowedCorsOrigins = { "https://localhost:44379" },
                     AllowedScopes = {
                         IdentityServerConstants.StandardScopes.OpenId,

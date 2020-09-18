@@ -3,6 +3,7 @@
     authority: "https://localhost:44360/",
     client_id: "client_id_js",
     redirect_uri: "https://localhost:44379/Home/SignIn",
+    post_logout_redirect_uri: "https://localhost:44379/Home/Index",
     response_type: "id_token token",
     scope: "openid rc.scope Masny.IdentityApiOne Masny.IdentityApiTwo"
 };
@@ -11,6 +12,10 @@ var userManager = new Oidc.UserManager(config);
 
 var signIn = function () {
     userManager.signinRedirect();
+};
+
+var signOut = function () {
+    userManager.signoutRedirect();
 };
 
 userManager.getUser().then(user => {

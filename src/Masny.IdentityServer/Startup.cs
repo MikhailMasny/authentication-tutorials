@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Masny.IdentityServer
 {
@@ -18,7 +20,7 @@ namespace Masny.IdentityServer
             _config = config;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
         {
             var connectionString = _config.GetConnectionString("DefaultConnection");
 
@@ -43,9 +45,15 @@ namespace Masny.IdentityServer
             {
                 config.Cookie.Name = "IdentityServer.Cookie";
                 config.LoginPath = "/Auth/Login";
+                config.LogoutPath = "Auth/Logout";
             });
 
             var assembly = typeof(Startup).Assembly.GetName().Name;
+
+
+            // https://docs.microsoft.com/en-us/archive/blogs/kaevans/using-powershell-with-certificates
+            var filePath = Path.Combine(env.ContentRootPath, "is_cert.pfx");
+            var certificate = new X509Certificate2(filePath, "password");
 
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
@@ -59,6 +67,7 @@ namespace Masny.IdentityServer
                     options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
                         sql => sql.MigrationsAssembly(assembly));
                 })
+                .AddSigningCredential(certificate)
                 // EF Core Setup
                 //.AddInMemoryApiResources(IdentityConfiguration.GetApis())
                 //.AddInMemoryIdentityResources(IdentityConfiguration.GetIdentityResources())
