@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -10,11 +11,21 @@ namespace Masny.IdentityServer
 {
     public class Startup
     {
+        private readonly IConfiguration _config;
+
+        public Startup(IConfiguration config)
+        {
+            _config = config;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = _config.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<AppDbContext>(config =>
             {
-                config.UseInMemoryDatabase("Memory");
+                config.UseSqlServer(connectionString);
+                //config.UseInMemoryDatabase("Memory");
             });
 
             // AddIdentity registers the services
@@ -34,12 +45,26 @@ namespace Masny.IdentityServer
                 config.LoginPath = "/Auth/Login";
             });
 
+            var assembly = typeof(Startup).Assembly.GetName().Name;
+
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
-                .AddInMemoryApiResources(IdentityConfiguration.GetApis())
-                .AddInMemoryIdentityResources(IdentityConfiguration.GetIdentityResources())
-                //.AddInMemoryApiScopes(IdentityConfiguration.GetScopes()) // Migrate to v4
-                .AddInMemoryClients(IdentityConfiguration.GetClients())
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                        sql => sql.MigrationsAssembly(assembly));
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                        sql => sql.MigrationsAssembly(assembly));
+                })
+                // EF Core Setup
+                //.AddInMemoryApiResources(IdentityConfiguration.GetApis())
+                //.AddInMemoryIdentityResources(IdentityConfiguration.GetIdentityResources())
+                //.AddInMemoryClients(IdentityConfiguration.GetClients())
+                // Migrate to v4
+                //.AddInMemoryApiScopes(IdentityConfiguration.GetScopes())
                 .AddDeveloperSigningCredential();
 
             services.AddControllersWithViews();

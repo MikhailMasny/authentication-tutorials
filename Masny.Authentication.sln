@@ -28,13 +28,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14D1FE2B-AEC8-4157-9603-8F4E63AEDCDF}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		identityserver-scripts.md = identityserver-scripts.md
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.IdentityMvcClient", "src\Masny.IdentityMvcClient\Masny.IdentityMvcClient.csproj", "{821F206A-5314-4910-98BE-C0FC8BF5DFB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masny.JavaScriptClient", "src\Masny.JavaScriptClient\Masny.JavaScriptClient.csproj", "{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masny.JavaScriptClient", "src\Masny.JavaScriptClient\Masny.JavaScriptClient.csproj", "{93D03986-97C9-47D8-8BE2-BA6BB680B1AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
