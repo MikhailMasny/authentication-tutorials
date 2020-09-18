@@ -8,6 +8,11 @@
 
 <script>
     var userManger = new Oidc.UserManager({ userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }) });
+    // Uncomment this code for PKCE
+    //var userManger = new Oidc.UserManager({
+    //    userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
+    //    response_mode: "query"
+    //});
 
     userManger.signinCallback().then(res => {
         console.log(res);

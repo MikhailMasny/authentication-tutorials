@@ -5,6 +5,7 @@
     redirect_uri: "https://localhost:44379/Home/SignIn",
     post_logout_redirect_uri: "https://localhost:44379/Home/Index",
     response_type: "id_token token",
+    // response_type: "code", <- Uncomment this code for PKCE
     scope: "openid rc.scope Masny.IdentityApiOne Masny.IdentityApiTwo"
 };
 

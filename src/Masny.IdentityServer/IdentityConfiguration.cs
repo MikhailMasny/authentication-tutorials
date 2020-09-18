@@ -50,6 +50,7 @@ namespace Masny.IdentityServer
                     ClientId = "client_id_mvc",
                     ClientSecrets = { new Secret("client_secret_mvc".ToSha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
+                    // RequirePkce = true, <- Uncomment this code for PKCE
                     RedirectUris = { "https://localhost:44317/signin-oidc" },
                     PostLogoutRedirectUris = { "https://localhost:44317/Home/Index" },
                     AllowedScopes = {
@@ -68,6 +69,10 @@ namespace Masny.IdentityServer
                 {
                     ClientId = "client_id_js",
                     AllowedGrantTypes = GrantTypes.Implicit,
+                    // Uncomment this code for PKCE
+                    //AllowedGrantTypes = GrantTypes.Code,
+                    //RequirePkce = true,
+                    //RequireClientSecret = false,
                     RedirectUris = { "https://localhost:44379/home/signin" },
                     PostLogoutRedirectUris = { "https://localhost:44379/Home/Index" },
                     AllowedCorsOrigins = { "https://localhost:44379" },
