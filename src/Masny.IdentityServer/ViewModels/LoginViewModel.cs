@@ -1,4 +1,7 @@
-﻿namespace Masny.IdentityServer.ViewModels
+﻿using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
+
+namespace Masny.IdentityServer.ViewModels
 {
     public class LoginViewModel
     {
@@ -7,5 +10,7 @@
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public IEnumerable<AuthenticationScheme> ExternalProviders { get; set; }
     }
 }

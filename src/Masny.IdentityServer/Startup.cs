@@ -52,8 +52,8 @@ namespace Masny.IdentityServer
 
 
             // https://docs.microsoft.com/en-us/archive/blogs/kaevans/using-powershell-with-certificates
-            var filePath = Path.Combine(env.ContentRootPath, "is_cert.pfx");
-            var certificate = new X509Certificate2(filePath, "password");
+            //var filePath = Path.Combine(env.ContentRootPath, "is_cert.pfx");
+            //var certificate = new X509Certificate2(filePath, "password");
 
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
@@ -67,7 +67,8 @@ namespace Masny.IdentityServer
                     options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
                         sql => sql.MigrationsAssembly(assembly));
                 })
-                .AddSigningCredential(certificate)
+                // For X509Certificate2
+                //.AddSigningCredential(certificate)
                 // EF Core Setup
                 //.AddInMemoryApiResources(IdentityConfiguration.GetApis())
                 //.AddInMemoryIdentityResources(IdentityConfiguration.GetIdentityResources())
@@ -75,6 +76,12 @@ namespace Masny.IdentityServer
                 // Migrate to v4
                 //.AddInMemoryApiScopes(IdentityConfiguration.GetScopes())
                 .AddDeveloperSigningCredential();
+
+            services.AddAuthentication()
+                .AddFacebook(config => {
+                    config.AppId = "";
+                    config.AppSecret = "";
+                });
 
             services.AddControllersWithViews();
         }

@@ -2,6 +2,8 @@
 using Masny.IdentityServer.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Masny.IdentityServer.Controllers
@@ -16,15 +18,20 @@ namespace Masny.IdentityServer.Controllers
                               SignInManager<IdentityUser> signInManager,
                               IIdentityServerInteractionService interactionService)
         {
-            _signInManager = signInManager ?? throw new System.ArgumentNullException(nameof(signInManager));
-            _interactionService = interactionService ?? throw new System.ArgumentNullException(nameof(interactionService));
-            _userManager = userManager ?? throw new System.ArgumentNullException(nameof(userManager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _interactionService = interactionService ?? throw new ArgumentNullException(nameof(interactionService));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public async Task<IActionResult> LoginAsync(string returnUrl)
         {
-            return View(new LoginViewModel { ReturnUrl = returnUrl });
+            var externalProviders = await _signInManager.GetExternalAuthenticationSchemesAsync();
+            return View(new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalProviders = externalProviders
+            });
         }
 
         [HttpPost]
@@ -84,6 +91,65 @@ namespace Masny.IdentityServer.Controllers
             }
 
             return Redirect(logoutRequest.PostLogoutRedirectUri);
+        }
+
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUri = Url.Action(nameof(ExteranlLoginCallback), "Auth", new { returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUri);
+            return Challenge(properties, provider);
+        }
+
+        public async Task<IActionResult> ExteranlLoginCallback(string returnUrl)
+        {
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var result = await _signInManager
+                .ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+
+            if (result.Succeeded)
+            {
+                return Redirect(returnUrl);
+            }
+
+            var username = info.Principal.FindFirst(ClaimTypes.Name.Replace(" ", "_")).Value;
+            return View("ExternalRegister", new ExternalRegisterViewModel
+            {
+                Username = username,
+                ReturnUrl = returnUrl
+            });
+        }
+
+        public async Task<IActionResult> ExternalRegister(ExternalRegisterViewModel vm)
+        {
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var user = new IdentityUser(vm.Username);
+            var result = await _userManager.CreateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return View(vm);
+            }
+
+            result = await _userManager.AddLoginAsync(user, info);
+
+            if (!result.Succeeded)
+            {
+                return View(vm);
+            }
+
+            await _signInManager.SignInAsync(user, false);
+
+            return Redirect(vm.ReturnUrl);
         }
     }
 }
