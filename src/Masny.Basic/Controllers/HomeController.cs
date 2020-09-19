@@ -96,6 +96,17 @@ namespace Masny.Basic.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            var infoViewModel = new InfoViewModel
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View(infoViewModel);
+        }
+
         // Or write: public async Task<IActionResult> DoStaff([FromServices] IAuthorizationService authorizationService)
         public async Task<IActionResult> DoStaff()
         {

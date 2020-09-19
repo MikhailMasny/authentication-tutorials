@@ -18,14 +18,14 @@ namespace Masny.IdentityServer
             _config = config;
         }
 
-        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = _config.GetConnectionString("DefaultConnection");
+            //var connectionString = _config.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<AppDbContext>(config =>
             {
-                config.UseSqlServer(connectionString);
-                //config.UseInMemoryDatabase("Memory");
+                //config.UseSqlServer(connectionString);
+                config.UseInMemoryDatabase("Memory");
             });
 
             // AddIdentity registers the services
@@ -43,10 +43,10 @@ namespace Masny.IdentityServer
             {
                 config.Cookie.Name = "IdentityServer.Cookie";
                 config.LoginPath = "/Auth/Login";
-                config.LogoutPath = "Auth/Logout";
+                config.LogoutPath = "/Auth/Logout";
             });
 
-            var assembly = typeof(Startup).Assembly.GetName().Name;
+            //var assembly = typeof(Startup).Assembly.GetName().Name;
 
             // https://docs.microsoft.com/en-us/archive/blogs/kaevans/using-powershell-with-certificates
             //var filePath = Path.Combine(env.ContentRootPath, "is_cert.pfx");
@@ -54,32 +54,32 @@ namespace Masny.IdentityServer
 
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
-                        sql => sql.MigrationsAssembly(assembly));
-                })
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
-                        sql => sql.MigrationsAssembly(assembly));
-                })
+                //.AddConfigurationStore(options =>
+                //{
+                //    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                //        sql => sql.MigrationsAssembly(assembly));
+                //})
+                //.AddOperationalStore(options =>
+                //{
+                //    options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                //        sql => sql.MigrationsAssembly(assembly));
+                //})
                 // For X509Certificate2
                 //.AddSigningCredential(certificate)
                 // EF Core Setup
-                //.AddInMemoryApiResources(IdentityConfiguration.GetApis())
-                //.AddInMemoryIdentityResources(IdentityConfiguration.GetIdentityResources())
-                //.AddInMemoryClients(IdentityConfiguration.GetClients())
+                .AddInMemoryApiResources(IdentityConfiguration.GetApis())
+                .AddInMemoryIdentityResources(IdentityConfiguration.GetIdentityResources())
+                .AddInMemoryClients(IdentityConfiguration.GetClients())
                 // Migrate to v4
                 //.AddInMemoryApiScopes(IdentityConfiguration.GetScopes())
                 .AddDeveloperSigningCredential();
 
-            services.AddAuthentication()
-                .AddFacebook(config =>
-                {
-                    config.AppId = "";
-                    config.AppSecret = "";
-                });
+            //services.AddAuthentication()
+            //    .AddFacebook(config =>
+            //    {
+            //        config.AppId = "";
+            //        config.AppSecret = "";
+            //    });
 
             services.AddControllersWithViews();
         }

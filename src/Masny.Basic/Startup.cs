@@ -20,9 +20,10 @@ namespace Masny.Basic
             services.AddAuthentication("CookieAuth")
                 .AddCookie("CookieAuth", config =>
                 {
-                    config.Cookie.MaxAge = new TimeSpan(0, 0, 10);
+                    config.Cookie.MaxAge = new TimeSpan(0, 0, 30);
                     config.Cookie.Name = "BasicCookie";
                     config.LoginPath = "/Home/Authenticate";
+                    config.AccessDeniedPath = "/Home/AccessDenied";
                 });
 
             services.AddAuthorization(config =>
